@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: picsfeed
+      POSTGRES_PASSWORD: picsfeed
+      POSTGRES_DB: picsfeed
+    ports:
+      - "5432:5432"
+
+  server:
+    build: ./server
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://picsfeed:picsfeed@db:5432/picsfeed
+
+  client:
+    build: ./client
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
