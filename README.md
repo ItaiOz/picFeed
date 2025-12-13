@@ -8,7 +8,6 @@ A full-stack image voting application built with React, FastAPI, and PostgreSQL.
 - Vote (like/dislike) on images
 - View live vote counts
 - Export votes to CSV
-- Reset all votes
 - Dockerized development environment with hot-reload
 
 ## Tech Stack
@@ -104,7 +103,6 @@ picsFeed/
 - `GET /images` - Retrieve all images with vote counts
 - `POST /vote` - Submit a vote (like/dislike)
 - `GET /export-votes` - Download votes as CSV
-- `POST /reset-votes` - Reset all votes to zero
 
 ## Development
 
@@ -172,20 +170,6 @@ cd e2e
 npm test                # Headless mode
 npm run test:headed     # Watch in browser
 npm run test:ui         # Interactive UI mode
-```
-
-### Test Coverage
-
-Run with coverage report:
-```bash
-# Server coverage
-cd server
-pytest --cov=. --cov-report=html tests/
-# Open htmlcov/index.html
-
-# Client coverage
-cd client
-npm test -- --coverage --watchAll=false
 ```
 
 ## Database Seeding

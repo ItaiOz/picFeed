@@ -122,10 +122,3 @@ def export_votes(db: Session = Depends(get_db)):
         media_type="text/csv",
         headers={"Content-Disposition": "attachment; filename=votes.csv"},
     )
-
-
-@app.post("/reset-votes")
-def reset_votes(db: Session = Depends(get_db)):
-    db.query(Vote).delete()
-    db.commit()
-    return {"message": "All votes have been reset"}

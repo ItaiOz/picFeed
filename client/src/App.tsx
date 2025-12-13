@@ -10,7 +10,6 @@ export const App = () => {
     error,
     handleVote,
     handleExport,
-    handleReset,
   } = useAppRequests();
 
   if (loading) {
@@ -36,7 +35,7 @@ export const App = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Header onExport={handleExport} onReset={handleReset} />
+      <Header onExport={handleExport} />
       <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={3}>
           {images.map((image) => (

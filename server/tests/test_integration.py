@@ -180,26 +180,3 @@ class TestExportEndpoint:
         lines = csv_content.strip().split("\n")
         assert lines[0] == "image_id,url,likes,dislikes"
         assert len(lines) == 1
-
-
-class TestResetEndpoint:
-    
-    def test_reset_votes(self, db_session):
-        image = Image(id=1, url="https://example.com/1.jpg")
-        db_session.add(image)
-        db_session.commit()
-        
-        vote1 = Vote(image_id=1, vote_type="like")
-        vote2 = Vote(image_id=1, vote_type="dislike")
-        db_session.add_all([vote1, vote2])
-        db_session.commit()
-        
-        assert db_session.query(Vote).count() == 2
-        
-        response = client.post("/reset-votes")
-        assert response.status_code == 200
-        assert response.json()["message"] == "All votes have been reset"
-        
-        assert db_session.query(Vote).count() == 0
-        
-        assert db_session.query(Image).count() == 1

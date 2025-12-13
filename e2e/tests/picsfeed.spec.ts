@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('PicsFeed E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await fetch('http://localhost:8000/reset-votes', { method: 'POST' });
     await page.goto('/');
   });
 
@@ -46,18 +45,6 @@ test.describe('PicsFeed E2E Tests', () => {
     
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toContain('.csv');
-  });
-
-  test('should reset all votes', async ({ page }) => {
-    await page.waitForSelector('img', { timeout: 10000 });
-    const firstCard = page.locator('[data-testid="image-card"]').first();
-    await firstCard.getByRole('button').first().click();
-    await page.waitForTimeout(500);
-    
-    const resetButton = page.getByRole('button', { name: /reset/i });
-    await resetButton.click();
-    
-    await page.waitForTimeout(1000);
   });
 
   test('should handle API errors gracefully', async ({ page }) => {
