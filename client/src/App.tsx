@@ -11,7 +11,7 @@ export const App = () => {
     handleVote,
     handleExport,
   } = useAppRequests();
-
+  
   if (loading) {
     return (
       <Box
